@@ -1,0 +1,42 @@
+<mvc:View
+	controllerName="shop.controller.InvoiceList"
+	xmlns:l="sap.ui.layout"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m">
+	<List
+		id="invoiceList"
+		showUnread="true"
+		width="auto"
+		items="{
+			path: 'invoice>/ProductCollection',
+			sorter:{
+				path: 'Category',
+				group: true
+			}
+		}" >
+		<headerToolbar>
+			<Toolbar>
+				<SearchField width="50%" search=".onFilterInvoices"/>
+			</Toolbar>
+		</headerToolbar>
+			<ObjectListItem
+				title="{invoice>Name}"
+					number="{
+						parts: [{path: 'invoice>Price'}, {path: 'view>/currency'}],
+						type: 'sap.ui.model.type.Currency',
+						formatOptions: {
+							showMeasure: false
+						}
+					}"
+					numberUnit="{view>/currency}"
+					icon="{invoice>ProductPicUrl}"
+					numberState="{=	${invoice>Price} > 550 ? 'Error' : 'Success' }">
+					<firstStatus>
+						<ObjectStatus text="{
+							path: 'invoice>Status',
+							formatter: '.formatter.statusText'
+						}"/>
+					</firstStatus>
+			</ObjectListItem>
+	</List>
+</mvc:View>
