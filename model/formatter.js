@@ -7,13 +7,12 @@ sap.ui.define(function () {
 			return (Math.random() < 0.5);
 		},
 		statusText: function (sStatus) {
-			var oResourceBundle = this.getView().getModel("i18n").getResourceBundle();
 
 			switch (sStatus) {
-				case "A":
-					return oResourceBundle.getText("invoiceStatusA");
-				case "B":
-					return oResourceBundle.getText("invoiceStatusB");
+				case "Available":
+					return 9;
+				case "sold out":
+					return 3;
 				default:
 					return sStatus;
 			}

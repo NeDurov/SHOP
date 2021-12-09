@@ -1,9 +1,10 @@
 <mvc:View
 	controllerName="shop.controller.InvoiceList"
-	xmlns:l="sap.ui.layout"
+	xmlns:core="sap.ui.core"
 	xmlns:mvc="sap.ui.core.mvc"
-	xmlns="sap.m">
-	<List
+	xmlns="sap.m"
+	xmlns:tnt="sap.tnt">
+	<Table
 		id="invoiceList"
 		showUnread="true"
 		width="auto"
@@ -19,24 +20,48 @@
 				<SearchField width="50%" search=".onFilterInvoices"/>
 			</Toolbar>
 		</headerToolbar>
-			<ObjectListItem
-				title="{invoice>Name}"
-					number="{
-						parts: [{path: 'invoice>Price'}, {path: 'view>/currency'}],
-						type: 'sap.ui.model.type.Currency',
-						formatOptions: {
-							showMeasure: false
-						}
-					}"
-					numberUnit="{view>/currency}"
-					icon="{invoice>ProductPicUrl}"
-					numberState="{=	${invoice>Price} > 550 ? 'Error' : 'Success' }">
-					<firstStatus>
-						<ObjectStatus text="{
-							path: 'invoice>Status',
-							formatter: '.formatter.statusText'
-						}"/>
-					</firstStatus>
-			</ObjectListItem>
-	</List>
+		<columns>
+			<Column width="12em">
+				<Text text="Product" />
+			</Column>
+			<Column minScreenWidth="Tablet" demandPopin="true">
+				<Text text="Supplier" />
+			</Column>
+			<Column minScreenWidth="Desktop" demandPopin="true">
+				<Text text="Dimensions" />
+			</Column>
+			<Column minScreenWidth="Desktop" demandPopin="true">
+				<Text text="Availability" />
+			</Column>
+			<Column>
+				<Text text="Price" />
+			</Column>
+		</columns>
+
+		<items>
+			<ColumnListItem>
+				<cells>
+					<ObjectIdentifier title="{invoice>Name}" text="{invoice>ProductId}" />
+					<Text text="{invoice>SupplierName}" />
+					<Text text="{invoice>Width} x {invoice>Depth} x {invoice>Height} {invoice>DimUnit}" />
+					<tnt:InfoLabel
+						text="{invoice>Status}"
+						displayOnly="true"
+						colorScheme= "{
+							parts: [
+								{path: 'Status'}
+							],
+							formatter: 'shop.model.formatter.statusText'
+						}" />
+					<ObjectNumber
+						number="{
+							parts:[{path:'invoice>Price'},{path:'invoice>CurrencyCode'}],
+							type: 'sap.ui.model.type.Currency',
+							formatOptions: {showMeasure: true}
+						}"
+						unit="{CurrencyCode}" />
+				</cells>
+			</ColumnListItem>
+		</items>
+	</Table>
 </mvc:View>
