@@ -18,14 +18,23 @@
 		<headerToolbar>
 			<Toolbar>
 				<SearchField width="50%" search=".onFilterInvoices"/>
+					<Label text="Table:"/>
+					<Switch state="true" customTextOn="On" customTextOff="Off" change=".onToggleSaveVisibility"/>
 			</Toolbar>
 		</headerToolbar>
+
 		<columns>
+			<Column width="12em">
+				<Text text="Photo" />
+			</Column>
 			<Column width="12em">
 				<Text text="Product" />
 			</Column>
 			<Column minScreenWidth="Tablet" demandPopin="true">
 				<Text text="Supplier" />
+			</Column>
+			<Column minScreenWidth="Desktop" demandPopin="true">
+				<Text text="Weight" />
 			</Column>
 			<Column minScreenWidth="Desktop" demandPopin="true">
 				<Text text="Dimensions" />
@@ -41,15 +50,30 @@
 		<items>
 			<ColumnListItem>
 				<cells>
+					<Image src="{invoice>ProductPicUrl}" width="60%"/>
 					<ObjectIdentifier title="{invoice>Name}" text="{invoice>ProductId}" />
 					<Text text="{invoice>SupplierName}" />
+					<ObjectNumber
+						inverted="true"
+						number="{
+							parts:[{path:'invoice>WeightMeasure'}, {path:'invoice>WeightUnit'}],
+							formatOptions: {showMeasure: true}
+						}"
+						state="{
+							parts:[
+								{path: 'invoice>WeightMeasure'},
+								{path: 'invoice>WeightUnit'}
+							],
+							formatter: 'shop.model.formatter.statusWeight'
+						}"
+						unit="{CurrencyCode}"
+					/>
 					<Text text="{invoice>Width} x {invoice>Depth} x {invoice>Height} {invoice>DimUnit}" />
 					<tnt:InfoLabel
 						text="{invoice>Status}"
-						displayOnly="true"
 						colorScheme= "{
 							parts: [
-								{path: 'Status'}
+								{path: 'invoice>Status'}
 							],
 							formatter: 'shop.model.formatter.statusText'
 						}" />
@@ -57,9 +81,15 @@
 						number="{
 							parts:[{path:'invoice>Price'},{path:'invoice>CurrencyCode'}],
 							type: 'sap.ui.model.type.Currency',
-							formatOptions: {showMeasure: true}
+							formatOptions: {showMeasure: false}
 						}"
-						unit="{CurrencyCode}" />
+						state="{
+							parts:[
+								{path: 'invoice>Price'}
+							],
+							formatter: 'shop.model.formatter.statusPrice'
+						}"
+						unit="{invoice>CurrencyCode}" />
 				</cells>
 			</ColumnListItem>
 		</items>
