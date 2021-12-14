@@ -14,12 +14,16 @@
 				path: 'Category',
 				group: true
 			}
-		}" >
+		}">
 		<headerToolbar>
 			<Toolbar>
 				<SearchField width="50%" search=".onFilterInvoices"/>
 					<Label text="Table:"/>
 					<Switch state="true" customTextOn="On" customTextOff="Off" change=".onToggleSaveVisibility"/>
+					<Button
+						tooltip="Sort"
+						icon="sap-icon://sort"
+						press="handleSortButtonPressed"/>
 			</Toolbar>
 		</headerToolbar>
 
@@ -27,7 +31,7 @@
 			<Column width="12em">
 				<Text text="Photo" />
 			</Column>
-			<Column width="12em">
+			<Column width="12em" >
 				<Text text="Product" />
 			</Column>
 			<Column minScreenWidth="Tablet" demandPopin="true">
