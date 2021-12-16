@@ -8,15 +8,9 @@
 		id="invoiceList"
 		showUnread="true"
 		width="auto"
-		items="{
-			path: 'invoice>/ProductCollection',
-			sorter:{
-				path: 'Category',
-				group: true
-			}
-		}">
+		items="{invoice>/ProductCollection}">
 		<headerToolbar>
-			<Toolbar>
+			<OverflowToolbar>
 				<SearchField width="50%" search=".onFilterInvoices"/>
 					<Label text="Table:"/>
 					<Switch state="true" customTextOn="On" customTextOff="Off" change=".onToggleSaveVisibility"/>
@@ -24,8 +18,22 @@
 						tooltip="Sort"
 						icon="sap-icon://sort"
 						press="handleSortButtonPressed"/>
-			</Toolbar>
+					<Button
+						tooltip="Filter"
+						icon="sap-icon://filter"
+						press="handleFilterButtonPressed"/>
+					<Button
+						tooltip="Group"
+						icon="sap-icon://group-2"
+						press="handleGroupButtonPressed"/>
+			</OverflowToolbar>
 		</headerToolbar>
+
+		<infoToolbar>
+			<OverflowToolbar id="vsdFilterBar" visible="false">
+				<Text id="vsdFilterLabel" />
+			</OverflowToolbar>
+		</infoToolbar>
 
 		<columns>
 			<Column width="12em">
