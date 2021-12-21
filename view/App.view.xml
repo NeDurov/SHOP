@@ -4,7 +4,7 @@
 	xmlns:mvc="sap.ui.core.mvc"
 	displayBlock="true">
 	<Shell>
-		<App>
+		<App id="app">
 			<pages>
 				<Page title="My  ♂SHOP♂">
 					<content>

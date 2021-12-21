@@ -21,6 +21,8 @@ sap.ui.define([
 			});
 			this.getView().setModel(oViewModel, "view");
 			this._mViewSettingDialog = {};
+			this.currentValueInput = this.byId("CurrentValue");
+			this.badgeButton = this.byId("BadgedButton");
 
 			this.mGroupFunctions = {
 				SupplierName: function (oContext) {
@@ -189,6 +191,27 @@ sap.ui.define([
 				oBinding.sort();
 				this.groupReset = false;
 			}
+		},
+
+		addToCart: function (oEvent) {
+			// __xmlview0--CurrentValue - __xmlview0--invoiceList - 0
+			// __xmlview0--ToCartButton - __xmlview0--invoiceList - 0
+
+			// let buttonID = oEvent.getParameters();
+			// let button = this.byId(buttonID.id);
+
+			// let iCurrent = this.currentValueInput.getValue(),
+			// 	oButtonBadgeCustomData = button.getBadgeCustomData(),
+			// 	sValue = iCurrent.toString();
+			// console.log(iCurrent);
+
+			// if (!oButtonBadgeCustomData) {
+			// 	return;
+			// }
+
+			// oButtonBadgeCustomData.setValue(sValue);
+			let oRouter = this.getOwnerComponent().getRouter();
+			oRouter.navTo("cart");
 		}
 	});
 

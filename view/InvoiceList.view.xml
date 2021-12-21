@@ -13,19 +13,39 @@
 			<OverflowToolbar>
 				<SearchField width="50%" search=".onFilterInvoices"/>
 					<Label text="Table:"/>
+
 					<Switch state="true" customTextOn="On" customTextOff="Off" change=".onToggleSaveVisibility"/>
+
 					<Button
 						tooltip="Sort"
 						icon="sap-icon://sort"
 						press="handleSortButtonPressed"/>
+
 					<Button
 						tooltip="Filter"
 						icon="sap-icon://filter"
 						press="handleFilterButtonPressed"/>
+
 					<Button
 						tooltip="Group"
 						icon="sap-icon://group-2"
 						press="handleGroupButtonPressed"/>
+
+					<!-- ?margin to end -->
+					<Button
+					id="BadgedButton"
+					class="sapUiTinyMarginBeginEnd"
+					icon="sap-icon://cart"
+					text="Cart">
+						<customData>
+							<BadgeCustomData
+								key="badge"
+								value="1"
+								visible="true"/>
+						</customData>
+					</Button>
+
+
 			</OverflowToolbar>
 		</headerToolbar>
 
@@ -57,14 +77,20 @@
 			<Column>
 				<Text text="Price" />
 			</Column>
+			<Column>
+				<Text text="Add to cart" />
+			</Column>
 		</columns>
 
 		<items>
 			<ColumnListItem>
 				<cells>
 					<Image src="{invoice>ProductPicUrl}" width="60%"/>
+
 					<ObjectIdentifier title="{invoice>Name}" text="{invoice>ProductId}" />
+
 					<Text text="{invoice>SupplierName}" />
+
 					<ObjectNumber
 						inverted="true"
 						number="{
@@ -80,7 +106,9 @@
 						}"
 						unit="{CurrencyCode}"
 					/>
+
 					<Text text="{invoice>Width} x {invoice>Depth} x {invoice>Height} {invoice>DimUnit}" />
+
 					<tnt:InfoLabel
 						text="{invoice>Status}"
 						colorScheme= "{
@@ -89,6 +117,7 @@
 							],
 							formatter: 'shop.model.formatter.statusText'
 						}" />
+
 					<ObjectNumber
 						number="{
 							parts:[{path:'invoice>Price'},{path:'invoice>CurrencyCode'}],
@@ -102,6 +131,22 @@
 							formatter: 'shop.model.formatter.statusPrice'
 						}"
 						unit="{invoice>CurrencyCode}" />
+
+					<!-- !Problem with StepInput -->
+					<!-- <FlexBox direction="Column"> -->
+					<!-- <StepInput
+						id="CurrentValue"
+						value="0"
+						width="130px"/> -->
+					<Button
+						id="ToCartButton"
+						class="sapUiTinyMarginBeginEnd"
+						icon="sap-icon://cart"
+						type="Default"
+						text="Add to cart"
+						press="addToCart"/>
+					<!-- </FlexBox> -->
+
 				</cells>
 			</ColumnListItem>
 		</items>

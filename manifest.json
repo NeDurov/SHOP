@@ -57,13 +57,13 @@
 			"routes": [
 				{
 					"pattern": "",
-					"name": "cart",
-					"target": "cart"
+					"name": "invoiceList",
+					"target": "invoiceList"
 				},
 				{
-					"pattern": "",
-					"name": "justList",
-					"target": "justList"
+					"pattern": "cart",
+					"name": "cart",
+					"target": "cart"
 				}
 			],
 			"targets": {
@@ -71,9 +71,9 @@
 					"viewId": "cart",
 					"viewName": "Cart"
 				},
-				"detail": {
-					"viewId": "justList",
-					"viewName": "JustList"
+				"invoiceList": {
+					"viewId": "invoiceList",
+					"viewName": "InvoiceList"
 				}
 			}
 		}
