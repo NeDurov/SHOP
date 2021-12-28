@@ -1,6 +1,6 @@
 sap.ui.define([
 	"sap/ui/core/UIComponent",
-	"sap/ui/model/json/JSONModel",
+	"sap/ui/model/json/JSONModel"
 ], function (UIComponent, JSONModel) {
 	"use strict";
 	return UIComponent.extend("shop.Component", {
@@ -13,13 +13,9 @@ sap.ui.define([
 
 			UIComponent.prototype.init.apply(this, arguments);
 
-			let oData = {
-				recipient: {
-					name: "World"
-				}
-			};
-			let oModel = new JSONModel(oData);
-			this.setModel(oModel);
+			let cartEntries = {Cart:[]};
+			let oCartModel = new JSONModel(cartEntries);
+			this.setModel(oCartModel);
 
 			this.getRouter().initialize();
 		}
