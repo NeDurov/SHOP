@@ -139,6 +139,7 @@
 						id="CurrentValue"
 						value="0"
 						width="130px"/> -->
+
 					<Button
 						id="ToCartButton"
 						class="sapUiTinyMarginBeginEnd"

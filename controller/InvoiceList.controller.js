@@ -10,13 +10,14 @@ sap.ui.define([
 
 ], function (formatter, Controller, JSONModel, Filter, FilterOperator, Sorter, Fragment, Device) {
 	"use strict";
+	let count = 0;
 
 	return Controller.extend("shop.controller.App", {
 
 		formatter: formatter,
 
 		onInit: function () {
-			var oViewModel = new JSONModel({
+			let oViewModel = new JSONModel({
 				currency: "EUR"
 			});
 			this.getView().setModel(oViewModel, "view");
@@ -54,7 +55,7 @@ sap.ui.define([
 			};
 		},
 
-		resetGroupDialog: function (oEvent) {
+		resetGroupDialog: function () {
 			this.groupReset = true;
 		},
 
@@ -210,6 +211,24 @@ sap.ui.define([
 			// }
 
 			// oButtonBadgeCustomData.setValue(sValue);
+			count++;
+			this.badgeButton.getBadgeCustomData().setValue(count);
+
+			// arrayCart.push(this.byId("invoiceList")
+			// 	.getBinding("items")
+			// 	.oList[oEvent.getParameters().id[oEvent.getParameters().id.length - 1]]);
+
+			this.getView().getModel().oData.Cart.push(this.byId("invoiceList")
+				.getBinding("items")
+				.oList[oEvent.getParameters().id[oEvent.getParameters().id.length - 1]]);
+			console.log(this.getView().getModel());
+
+			// console.log(oEvent.getParameters().id[oEvent.getParameters().id.length - 1]);
+			// console.log(this.byId("invoiceList").getBinding("items").oList[oEvent.getParameters().id[oEvent.getParameters().id.length - 1]]);
+
+		},
+
+		GoToCart: function (oEvent) {
 			let oRouter = this.getOwnerComponent().getRouter();
 			oRouter.navTo("cart");
 		}
