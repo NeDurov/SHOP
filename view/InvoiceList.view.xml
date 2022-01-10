@@ -36,11 +36,12 @@
 					id="BadgedButton"
 					class="sapUiTinyMarginBeginEnd"
 					icon="sap-icon://cart"
-					text="Cart">
+					text="Cart"
+					press=".GoToCart">
 						<customData>
 							<BadgeCustomData
 								key="badge"
-								value="1"
+								value="0"
 								visible="true"/>
 						</customData>
 					</Button>

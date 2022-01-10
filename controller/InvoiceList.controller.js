@@ -193,7 +193,7 @@ sap.ui.define([
 			}
 		},
 
-		addToCart: function (oEvent) {
+		GoToCart: function (oEvent) {
 			// __xmlview0--CurrentValue - __xmlview0--invoiceList - 0
 			// __xmlview0--ToCartButton - __xmlview0--invoiceList - 0
 
